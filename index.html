@@ -1607,7 +1607,7 @@
 	img.onload = function() {
 		// Applique l'image de fond et les styles nécessaires
 		document.body.style.backgroundImage = `url(${img.src})`;
-		document.body.style.backgroundSize = 'cover'; // Définit l'image de fond à couvrir toute la page
+		document.body.style.backgroundSize = 'contain'; // Définit l'image de fond à couvrir toute la page
 		document.body.style.margin = '0';
 		document.body.style.display = 'flex';
 		document.body.style.justifyContent = 'center';
