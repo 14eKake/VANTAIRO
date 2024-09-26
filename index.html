@@ -29,6 +29,17 @@
 				overflow: visible; /* Assure que tout le contenu est visible */
 			}
 		}
+		
+		#particles-js {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1; /* Place les particules derrière le contenu */
+			pointer-events: none; /* Empêche les particules d'interférer avec les clics */
+		}
+
 
 
         /* Conteneur principal de la grille */
@@ -508,12 +519,15 @@
     </style>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 </head>
 <body>
 
 <div class="main-container">
 	<div class="grid-container">
+	<div id="particles-js"></div>
+
 		<!-- Première Section avec deux lignes -->
 		<div class="section-1">
 			<!-- Première Ligne avec deux colonnes -->
@@ -1605,6 +1619,79 @@
 		document.body.style.padding = '20px'; // Ajoute de l'espace pour le cadre
 		document.body.style.boxSizing = 'border-box';
 	};
+	
+	particlesJS('particles-js', {
+    "particles": {
+        "number": {
+            "value": 80, // Ajuste le nombre de particules
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+        },
+        "color": {
+            "value": ["#ff4500", "#ff8c00", "#ffd700"] // Couleurs pour simuler des flammes
+        },
+        "shape": {
+            "type": "circle",
+            "stroke": {
+                "width": 0,
+                "color": "#000000"
+            },
+        },
+        "opacity": {
+            "value": 0.7,
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 1,
+                "opacity_min": 0.3,
+                "sync": false
+            }
+        },
+        "size": {
+            "value": 5,
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 5,
+                "size_min": 1,
+                "sync": false
+            }
+        },
+        "line_linked": {
+            "enable": false
+        },
+        "move": {
+            "enable": true,
+            "speed": 6,
+            "direction": "top",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+            }
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": {
+                "enable": false
+            },
+            "onclick": {
+                "enable": false
+            },
+            "resize": true
+        }
+    },
+    "retina_detect": true
+});
+
 
 </script>
 </body>
