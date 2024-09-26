@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANTAIRO</title>
     <style>
-		/* Amélioration du fond de la page pour correspondre à l'esthétique globale */
 		body {
 			margin: 0;
 			display: flex;
@@ -13,11 +12,13 @@
 			align-items: center;
 			height: auto;
 			font-family: Arial, sans-serif;
-			background: #f8f4e3; /* Couleur douce et neutre */
-			background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Texture subtile */
-			background-size: cover;
 			color: #333;
+			background: url('images/BACKGROUND.webp') no-repeat center center fixed; /* Intègre l'image de fond */
+			background-size: cover; /* Ajuste l'image pour qu'elle couvre toute la page */
+			background-color: #000; /* Définit le fond en noir */
+
 		}
+
 
 
         /* Conteneur principal de la grille */
@@ -61,14 +62,14 @@
 			grid-template-rows: auto auto; /* Divise la colonne en deux lignes de taille égale */
 			gap: 10px; /* Espace de 10 pixels entre les deux lignes */
 			/*background-color: #f4f4f4;*/
-			border: 1px solid #ccc;
+			/*border: 1px solid #ccc;*/
 			padding: 10px;
 		}
 
 
         /* Style des blocs internes */
         .block {
-            border: 1px solid #ccc;
+            /*border: 1px solid #ccc;*/
             padding: 10px;
             display: flex;
             flex-direction: column;
@@ -81,7 +82,7 @@
         /* Style spécifique pour la liste des informations du personnage */
         .character-info {
             background-color: #f8f1e4;
-            border: 1px solid #7c291f;
+            /*border: 1px solid #7c291f;*/
             padding: 10px;
             font-size: 14px;
             color: #5a3e36;
@@ -117,7 +118,7 @@
         .character-info input {
             flex: 1;
             padding: 5px;
-            border: 1px solid #ccc;
+            /*border: 1px solid #ccc;*/
             border-radius: 4px;
             font-size: 14px;
         }
@@ -366,6 +367,7 @@
 			flex-direction: column;
 			min-height: 100vh; /* Assure que le conteneur prend toute la hauteur de la page */
 			overflow-y: auto; /* Permet le défilement vertical si nécessaire */
+			background-color: #faf3e0;
 
 		}
 		/* Assurer que les sections ne sont pas poussées hors de l'écran */
@@ -427,6 +429,17 @@
 			border: 1px solid #7c291f;
 			border-radius: 5px;
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		.table-title {
+			margin: 0 0 5px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #fff; /* Change la couleur du texte en blanc */
+			background-color: rgba(0, 0, 0, 0.6); /* Ajoute un fond noir transparent */
+			padding: 5px;
+			border-bottom: 1px solid #7c291f;
+			border-radius: 5px; /* Ajoute un effet arrondi aux coins */
 		}
 
 
