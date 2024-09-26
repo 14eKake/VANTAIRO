@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANTAIRO</title>
     <style>
-		body {
-			margin: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: auto;
-			font-family: Arial, sans-serif;
-			color: #333;
-			background: url('images/BACKGROUND.webp') no-repeat center center fixed; /* Intègre l'image de fond */
-			background-size: cover; /* Ajuste l'image pour qu'elle couvre toute la page */
-			background-color: #000; /* Définit le fond en noir */
 
-		}
+			body {
+				margin: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: auto;
+				font-family: Arial, sans-serif;
+				background-color: #f8f4e3;
+				background-image: url('images/BACKGROUND.webp'); /* Garde ton image de fond */
+				background-size: cover;
+				color: #333;
+				padding: 20px; /* Ajoute de l'espace pour le cadre */
+				box-sizing: border-box;
+			}
 
 
 
@@ -361,7 +363,6 @@
 			background-color: #faf3e0;
 		}
 		
-		/* Conteneur principal qui englobe toute la page */
 		.main-container {
 			border: 5px solid #7c291f; /* Crée un cadre similaire à tes autres éléments */
 			border-radius: 10px; /* Ajoute des coins arrondis pour harmoniser avec ton design */
@@ -369,7 +370,7 @@
 			background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement transparent */
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre subtile pour un effet de relief */
 		}
-	    
+		
 		/* Assurer que les sections ne sont pas poussées hors de l'écran */
 		.main-container > *:not(.page-footer) {
 			flex: 1 0 auto; /* Permet aux sections de s'adapter sans pousser le haut hors de l'écran */
@@ -440,6 +441,52 @@
 			padding: 5px;
 			border-bottom: 1px solid #7c291f;
 			border-radius: 5px; /* Ajoute un effet arrondi aux coins */
+		}
+
+		.help-button {
+			background-color: #007BFF; /* Couleur de fond bleu */
+			border: none;
+			font-size: 16px;
+			cursor: pointer;
+			color: #fff;
+			border-radius: 50%; /* Rond */
+			width: 30px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			top: 10px;
+			right: 10px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Légère ombre */
+		}
+
+		.help-popup {
+			display: none; /* Caché par défaut */
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 1000;
+			background-color: #fff;
+			border: 2px solid #7c291f;
+			border-radius: 8px;
+			padding: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			max-width: 400px;
+		}
+
+		.help-content {
+			position: relative;
+		}
+
+		.close-popup {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 20px;
+			cursor: pointer;
+			color: #7c291f;
 		}
 
 
@@ -1348,7 +1395,21 @@
 		<button id="saveJSON" class="button">Enregistrer en JSON</button>
 		<input type="file" id="loadJSON" class="button" accept=".json" style="display: none;">
 		<label for="loadJSON" class="button" style="cursor: pointer;">Charger depuis JSON</label>
+			<button id="helpButton" class="help-button">?</button>
 	</div>
+	
+
+
+	<!-- Pop-up explicatif -->
+	<div id="helpPopup" class="help-popup">
+		<div class="help-content">
+			<span id="closePopup" class="close-popup">&times;</span>
+			<h2>Aide sur l'enregistrement et le chargement</h2>
+			<p>Pour enregistrer vos données en JSON, cliquez sur le bouton "Enregistrer en JSON". Cela va créer un fichier contenant toutes les informations que vous avez saisies dans le formulaire.</p>
+			<p>Pour charger des données depuis un fichier JSON, cliquez sur le bouton "Charger depuis JSON" et sélectionnez votre fichier. Les champs du formulaire seront remplis automatiquement avec les données du fichier.</p>
+		</div>
+	</div>
+
 
 	<footer class="page-footer">
 		<p>&copy; 2024 Vantairo. Tous droits réservés.</p>
@@ -1479,6 +1540,25 @@
 			<td><input type="text" id="spell-${rowCount}-desc" name="spell-${rowCount}-desc" placeholder="-"></td>
 		`;
 	});			
+	
+	// Script pour afficher le pop-up d'aide
+	document.getElementById('helpButton').addEventListener('click', () => {
+		document.getElementById('helpPopup').style.display = 'block';
+	});
+
+	// Script pour fermer le pop-up
+	document.getElementById('closePopup').addEventListener('click', () => {
+		document.getElementById('helpPopup').style.display = 'none';
+	});
+
+	// Fermer le pop-up quand on clique à l'extérieur
+	window.addEventListener('click', (event) => {
+		const popup = document.getElementById('helpPopup');
+		if (event.target === popup) {
+			popup.style.display = 'none';
+		}
+	});
+
 </script>
 
 
