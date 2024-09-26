@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -545,6 +546,11 @@
 						<h4>Informations Générales :</h4>
 						<ul>
 							<li>
+								<label for="race">Nom :</label>
+								<input type="text" id="nom" name="nom" placeholder="Ex: Lekael">
+							</li>
+							<li>
+							<li>
 								<label for="race">Race :</label>
 								<input type="text" id="race" name="race" placeholder="Ex: Humain">
 							</li>
@@ -559,6 +565,10 @@
 							<li>
 								<label for="dons">Dons :</label>
 								<input type="text" id="dons" name="dons" placeholder="Ex: Force Inébranlable">
+							</li>
+							<li>
+								<label for="dons">Rang :</label>
+								<input type="text" id="rang" name="rang" placeholder="Ex: ...">
 							</li>
 						</ul>
 					</div>
@@ -685,7 +695,7 @@
 					</div>
 				</div>
 			<!-- Deuxième Ligne -->
-				<div class="block">
+			<div class="block">
 					<h4 class="table-title">Points</h4>
 					<table class="points-table">
 						<thead>
@@ -718,6 +728,44 @@
 								<td>
 									<input type="number" id="experience-max" name="experience-max" min="0" placeholder="Max">
 									<input type="number" id="experience-actuel" name="experience-actuel" min="0" placeholder="Actuel">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+			<div class="block">
+				<h4 class="table-title">Rang</h4>
+					<table class="points-table">
+						<thead>
+							<tr>
+								<th>Rang</th>
+								<th>Rang</th>
+								<th>Rang</th>
+								<th>Rang</th>
+								<th>Rang</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="number" id="rang-1-1" name="rang-1-1" min="0" placeholder="-">
+									<input type="number" id="rang-1-2" name="rang-1-2" min="0" placeholder="-">
+								</td>
+								<td>
+									<input type="number" id="rang-2-1" name="rang-2-1" min="0" placeholder="-">
+									<input type="number" id="rang-2-2" name="rang-2-2" min="0" placeholder="-">
+								</td>
+								<td>
+									<input type="number" id="rang-3-1" name="rang-3-1" min="0" placeholder="-">
+									<input type="number" id="rang-3-2" name="rang-3-2" min="0" placeholder="-">
+								</td>
+								<td>
+									<input type="number" id="rang-4-1" name="rang-4-1" min="0" placeholder="-">
+									<input type="number" id="rang-4-2" name="rang-4-2" min="0" placeholder="-">
+								</td>
+								<td>
+									<input type="number" id="rang-5-1" name="rang-5-1" min="0" placeholder="-">
+									<input type="number" id="rang-5-2" name="rang-5-2" min="0" placeholder="-">
 								</td>
 							</tr>
 						</tbody>
@@ -756,31 +804,31 @@
 								<td><input type="number" id="accumulation-mana-total" name="accumulation-mana-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Projection Manaïque</td>
+								<td>Projection Manaïque (Dex)</td>
 								<td><input type="number" id="projection-mana-mod" name="projection-mana-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="projection-mana-bonus" name="projection-mana-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="projection-mana-total" name="projection-mana-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Convaincre</td>
+								<td>Convaincre (Pou)</td>
 								<td><input type="number" id="convaincre-mod" name="convaincre-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="convaincre-bonus" name="convaincre-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="convaincre-total" name="convaincre-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Dominer</td>
+								<td>Dominer (Vol)</td>
 								<td><input type="number" id="dominer-mod" name="dominer-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="dominer-bonus" name="dominer-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="dominer-total" name="dominer-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Lier</td>
+								<td>Lier (Pou)</td>
 								<td><input type="number" id="lier-mod" name="lier-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="lier-bonus" name="lier-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="lier-total" name="lier-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Révoquer</td>
+								<td>Révoquer (Pou)</td>
 								<td><input type="number" id="revoquer-mod" name="revoquer-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="revoquer-bonus" name="revoquer-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="revoquer-total" name="revoquer-total" min="0" placeholder="0"></td>
@@ -813,25 +861,25 @@
 								<td><input type="number" id="attaque-ad-total" name="attaque-ad-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Parade</td>
+								<td>Pugilat (Dex)</td>
+								<td><input type="number" id="pugilat-mod" name="pugilat-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="pugilat-bonus" name="pugilat-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="pugilat-total" name="pugilat-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Parade (Dex)</td>
 								<td><input type="number" id="parade-mod" name="parade-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="parade-bonus" name="parade-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="paradeparade-bonus" name="parade-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="parade-total" name="parade-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Esquive</td>
+								<td>Esquive (Dex/Agi)</td>
 								<td><input type="number" id="esquive-mod" name="esquive-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="esquive-bonus" name="esquive-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="esquive-total" name="esquive-total" min="0" placeholder="0"></td>
 							</tr>
 							<tr>
-								<td>Flux</td>
-								<td><input type="number" id="flux-mod" name="flux-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="flux-bonus" name="flux-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="flux-total" name="flux-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Port d'armure</td>
+								<td>Port d'armure (For)</td>
 								<td><input type="number" id="port-armure-mod" name="port-armure-mod" min="0" placeholder="0"></td>
 								<td><input type="number" id="port-armure-bonus" name="port-armure-bonus" min="0" placeholder="0"></td>
 								<td><input type="number" id="port-armure-total" name="port-armure-total" min="0" placeholder="0"></td>
@@ -856,46 +904,10 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>Mana</td>
-								<td><input type="number" id="psy-mana-mod" name="psy-mana-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-mana-bonus" name="psy-mana-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-mana-total" name="psy-mana-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Accumulation de mana</td>
-								<td><input type="number" id="psy-accumulation-mana-mod" name="psy-accumulation-mana-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-accumulation-mana-bonus" name="psy-accumulation-mana-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-accumulation-mana-total" name="psy-accumulation-mana-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Projection Manaïque</td>
-								<td><input type="number" id="psy-projection-mana-mod" name="psy-projection-mana-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-projection-mana-bonus" name="psy-projection-mana-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-projection-mana-total" name="psy-projection-mana-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Convaincre</td>
-								<td><input type="number" id="psy-convaincre-mod" name="psy-convaincre-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-convaincre-bonus" name="psy-convaincre-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-convaincre-total" name="psy-convaincre-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Dominer</td>
-								<td><input type="number" id="psy-dominer-mod" name="psy-dominer-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-dominer-bonus" name="psy-dominer-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-dominer-total" name="psy-dominer-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Lier</td>
-								<td><input type="number" id="psy-lier-mod" name="psy-lier-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-lier-bonus" name="psy-lier-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-lier-total" name="psy-lier-total" min="0" placeholder="0"></td>
-							</tr>
-							<tr>
-								<td>Révoquer</td>
-								<td><input type="number" id="psy-revoquer-mod" name="psy-revoquer-mod" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-revoquer-bonus" name="psy-revoquer-bonus" min="0" placeholder="0"></td>
-								<td><input type="number" id="psy-revoquer-total" name="psy-revoquer-total" min="0" placeholder="0"></td>
+								<td>Projection psychique</td>
+								<td><input type="number" id="projection-psychique-mod" name="projection-psychique-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="projection-psychique-bonus" name="projection-psychique-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="projection-psychique-total" name="projection-psychique-total" min="0" placeholder="0"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -1417,6 +1429,41 @@
 			<button class="button" id="addSpellRowBtn">Ajouter une ligne</button>
 		</div>
 
+		<!-- Sixième Section - Talent Générique -->
+		<div class="section-6">
+			<h4 class="table-title">Talents Générique</h4>
+				<table class="skills-table" id="talentgenerique">
+					<thead>
+						<tr>
+							<th>Noms</th>
+							<th>Niveau</th>
+							<th>Coûts</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" id="talent-1-name" name="talent-1-name" placeholder="-"></td>
+							<td><input type="text" id="talent-1-level" name="talent-1-level" placeholder="-"></td>
+							<td><input type="text" id="talent-1-cost" name="talent-1-cost" placeholder="-"></td>
+							<td><input type="text" id="talent-1-desc" name="talent-1-desc" placeholder="-"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="talent-2-name" name="talent-2-name" placeholder="-"></td>
+							<td><input type="text" id="talent-2-level" name="talent-2-level" placeholder="-"></td>
+							<td><input type="text" id="talent-2-cost" name="talent-2-cost" placeholder="-"></td>
+							<td><input type="text" id="talent-2-desc" name="talent-2-desc" placeholder="-"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="talent-3-name" name="talent-3-name" placeholder="-"></td>
+							<td><input type="text" id="talent-3-level" name="talent-3-level" placeholder="-"></td>
+							<td><input type="text" id="talent-3-cost" name="talent-3-cost" placeholder="-"></td>
+							<td><input type="text" id="talent-3-desc" name="talent-3-desc" placeholder="-"></td>
+						</tr>
+					</tbody>
+				</table>
+			<button class="button" id="addTalentRowBtn">Ajouter une ligne</button>
+		</div>
 
 	<div class="button-container">
 		<button id="downloadPDF" class="button">Enregistrer en PDF</button>
@@ -1575,6 +1622,20 @@
 			<td><input type="text" id="spell-${rowCount}-level" name="spell-${rowCount}-level" placeholder="-"></td>
 			<td><input type="text" id="spell-${rowCount}-cost" name="spell-${rowCount}-cost" placeholder="-"></td>
 			<td><input type="text" id="spell-${rowCount}-desc" name="spell-${rowCount}-desc" placeholder="-"></td>
+		`;
+	});
+	
+	// Fonction pour ajouter une ligne dans le tableau des Talent générique
+	document.getElementById('addTalentRowBtn').addEventListener('click', function () {
+		const table = document.getElementById('talentgenerique').getElementsByTagName('tbody')[0];
+		const rowCount = table.rows.length + 1;
+
+		const row = table.insertRow();
+		row.innerHTML = `
+			<td><input type="text" id="talent-${rowCount}-name" name="talent-${rowCount}-name" placeholder="-"></td>
+			<td><input type="text" id="talent-${rowCount}-level" name="talent-${rowCount}-level" placeholder="-"></td>
+			<td><input type="text" id="talent-${rowCount}-cost" name="talent-${rowCount}-cost" placeholder="-"></td>
+			<td><input type="text" id="talent-${rowCount}-desc" name="talent-${rowCount}-desc" placeholder="-"></td>
 		`;
 	});			
 	
