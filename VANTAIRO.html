@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Grid avec Formulaire</title>
+    <style>
+		/* Amélioration du fond de la page pour correspondre à l'esthétique globale */
+		body {
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: auto;
+			font-family: Arial, sans-serif;
+			background: #f8f4e3; /* Couleur douce et neutre */
+			background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* Texture subtile */
+			background-size: cover;
+			color: #333;
+		}
+
+
+        /* Conteneur principal de la grille */
+        .grid-container {
+            display: grid;
+            grid-template-rows: 1fr 1fr; /* Deux sections de taille égale en hauteur */
+            gap: 10px;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            /*border: 1px solid green;*/
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Première section divisée en deux lignes */
+		.section-1 {
+			display: grid;
+			grid-template-rows: auto auto; /* Chaque ligne s'adapte à la taille de son contenu */
+			gap: 10px;
+			/*border: 1px solid green;*/
+			padding: 10px;
+		}
+
+		.row-1 {
+			display: grid;
+			grid-template-columns: auto auto; /* Chaque colonne s'adapte à la taille de son contenu */
+			gap: 10px;
+		}
+
+		.col-1 {
+			display: grid;
+			grid-template-rows: auto auto; /* Chaque ligne s'adapte à la taille de son contenu */
+			gap: 10px;
+		}
+
+
+        /* Deuxième colonne de la première ligne */
+		.col-2 {
+			display: grid;
+			grid-template-rows: auto auto; /* Divise la colonne en deux lignes de taille égale */
+			gap: 10px; /* Espace de 10 pixels entre les deux lignes */
+			/*background-color: #f4f4f4;*/
+			border: 1px solid #ccc;
+			padding: 10px;
+		}
+
+
+        /* Style des blocs internes */
+        .block {
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /*background-color: #f4f4f4;*/
+        }
+
+        /* Style spécifique pour la liste des informations du personnage */
+        .character-info {
+            background-color: #f8f1e4;
+            border: 1px solid #7c291f;
+            padding: 10px;
+            font-size: 14px;
+            color: #5a3e36;
+        }
+
+        .character-info h4 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7c291f;
+            border-bottom: 1px solid #7c291f;
+            padding-bottom: 5px;
+        }
+
+        .character-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .character-info li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .character-info label {
+            width: 60px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .character-info input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Deuxième section simple */
+		.section-2 {
+			display: grid;
+			grid-template-rows: 1fr 1fr; /* Deux lignes de taille égale */
+			gap: 20px;
+		}
+
+        /* Style pour les titres */
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Style pour les paragraphes */
+        .content {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* Style pour les boutons */
+        .button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+		
+		.image-frame {
+			display: inline-block; /* Le cadre s'adapte à la taille de l'image */
+			padding: 5px;
+			border: 2px solid #7c291f; /* Couleur et épaisseur du cadre */
+			border-radius: 8px; /* Coins arrondis */
+			background-color: #fff; /* Fond blanc pour contraster */
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de relief */
+		}
+
+		#characterImage {
+			display: block;
+			max-width: 100%; /* L'image s'ajuste à l'espace disponible */
+			border-radius: 4px; /* Coins arrondis de l'image pour s'harmoniser avec le cadre */
+		}
+
+		/* Style des titres des tableaux */
+		.table-title {
+			margin: 0 0 5px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #7c291f;
+			border-bottom: 1px solid #7c291f;
+			padding-bottom: 5px;
+		}
+
+		/* Style des tableaux */
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 10px;
+			background-color: #f8f1e4;
+		}
+
+		th, td {
+			border: 1px solid #7c291f;
+			padding: 5px;
+			text-align: left;
+			font-size: 14px;
+		}
+
+		th {
+			background-color: #e5d1ba;
+			color: #7c291f;
+			font-weight: bold;
+		}
+
+		td input {
+			width: 100%;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			padding: 3px;
+			font-size: 14px;
+			box-sizing: border-box;
+		}
+		
+		/* Style des titres des tableaux */
+		.table-title {
+			margin: 0 0 5px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #7c291f;
+			border-bottom: 1px solid #7c291f;
+			padding-bottom: 5px;
+		}
+
+		/* Style du tableau des points */
+		.points-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 10px;
+			background-color: #f8f1e4;
+		}
+
+		.points-table th, .points-table td {
+			border: 1px solid #7c291f;
+			padding: 5px;
+			text-align: center;
+			font-size: 14px;
+		}
+
+		.points-table th {
+			background-color: #e5d1ba;
+			color: #7c291f;
+			font-weight: bold;
+		}
+
+		.points-table td input {
+			width: 80%;
+			border: 1px solid #b89d76;
+			border-radius: 4px;
+			padding: 5px;
+			font-size: 14px;
+			box-sizing: border-box;
+			background-color: #faf3e0; /* Couleur douce pour le fond */
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre intérieure subtile */
+			transition: background-color 0.3s, border-color 0.3s;
+		}
+
+		.points-table td input:focus {
+			background-color: #fff8e7; /* Fond légèrement plus clair au focus */
+			border-color: #7c291f; /* Couleur de la bordure au focus */
+			outline: none; /* Retire la bordure bleue par défaut */
+		}
+		
+		/* Style global pour tous les inputs de la page */
+		input[type="number"], input[type="text"], input[type="file"] {
+			width: 80%;
+			border: 1px solid #b89d76;
+			border-radius: 4px;
+			padding: 5px;
+			font-size: 14px;
+			box-sizing: border-box;
+			background-color: #faf3e0; /* Couleur douce pour le fond */
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre intérieure subtile */
+			transition: background-color 0.3s, border-color 0.3s;
+		}
+
+		/* Style pour le focus des inputs */
+		input[type="number"]:focus, input[type="text"]:focus, input[type="file"]:focus {
+			background-color: #fff8e7; /* Fond légèrement plus clair au focus */
+			border-color: #7c291f; /* Couleur de la bordure au focus */
+			outline: none; /* Retire la bordure bleue par défaut */
+		}
+
+		.section-2 {
+			display: grid;
+			grid-template-rows: auto auto; /* Deux lignes de taille égale */
+			gap: 20px;
+		}
+
+		.row-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr; /* Deux colonnes de taille égale */
+			gap: 20px;
+		}
+
+		.column {
+			background-color: #f8f1e4;
+			padding: 10px;
+			border: 1px solid #7c291f;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		.section-title {
+			grid-column: 1 / -1;
+			font-size: 20px;
+			color: #7c291f;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		/* Table styles */
+		.skills-table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.skills-table th, .skills-table td {
+			border: 1px solid #7c291f;
+			padding: 5px;
+			text-align: left;
+			font-size: 14px;
+		}
+
+		.skills-table th {
+			background-color: #e5d1ba;
+			color: #7c291f;
+			font-weight: bold;
+		}
+
+		.skills-table td input {
+			width: 80%;
+			padding: 4px;
+			border: 1px solid #b89d76;
+			border-radius: 4px;
+			background-color: #faf3e0;
+		}
+		
+		/* Conteneur principal qui englobe toute la page */
+		.main-container {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh; /* Assure que le conteneur prend toute la hauteur de la page */
+			overflow-y: auto; /* Permet le défilement vertical si nécessaire */
+
+		}
+		/* Assurer que les sections ne sont pas poussées hors de l'écran */
+		.main-container > *:not(.page-footer) {
+			flex: 1 0 auto; /* Permet aux sections de s'adapter sans pousser le haut hors de l'écran */
+		}
+		
+		
+		/* Désactive les hauteurs excessives */
+		section, header, footer {
+			max-height: none; /* Empêche des hauteurs trop restrictives */
+		}
+		.page-footer {
+			width: 100%;
+			padding: 20px;
+			background-color: #7c291f; /* Couleur de fond adaptée à ton design */
+			color: #fff; /* Texte en blanc pour contraster */
+			text-align: center;
+			box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ombre subtile pour délimiter */
+			font-size: 14px;
+			border-radius: 5px;
+			margin-top: auto; /* Pousse le footer vers le bas */
+		}
+
+		.page-footer p {
+			margin: 5px 0;
+		}
+
+		.footer-links a {
+			color: #f8f1e4;
+			text-decoration: none;
+			margin: 0 5px;
+			transition: color 0.3s;
+		}
+
+		.footer-links a:hover {
+			color: #ddd; /* Change la couleur au survol */
+		}
+
+
+    </style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+</head>
+<body>
+
+<div class="main-container">
+	<div class="grid-container">
+		<!-- Première Section avec deux lignes -->
+		<div class="section-1">
+			<!-- Première Ligne avec deux colonnes -->
+			<div class="row-1">
+				<!-- Première Colonne avec deux lignes (40% et 60%) -->
+				<div class="col-1">
+					<div class="block image-upload">
+						<div class="image-frame">
+							<img id="characterImage" src="" alt="Aperçu de l'image">
+						</div>
+						<input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)" style="display:none;">
+						<button class="button" onclick="document.getElementById('imageUpload').click();">Ajouter une image du personnage</button>
+					</div>
+					<div class="character-info">
+						<h4>Informations Générales :</h4>
+						<ul>
+							<li>
+								<label for="race">Race :</label>
+								<input type="text" id="race" name="race" placeholder="Ex: Humain">
+							</li>
+							<li>
+								<label for="classe">Classe :</label>
+								<input type="text" id="classe" name="classe" placeholder="Ex: Guerrier">
+							</li>
+							<li>
+								<label for="niveau">Niveau :</label>
+								<input type="number" id="niveau" name="niveau" placeholder="Ex: 5" min="1">
+							</li>
+							<li>
+								<label for="dons">Dons :</label>
+								<input type="text" id="dons" name="dons" placeholder="Ex: Force Inébranlable">
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Deuxième Colonne -->
+					<div class="col-2">
+						<!-- Ligne pour les Caractéristiques -->
+						<div class="characteristics">
+							<h4 class="table-title">Caractéristiques</h4>
+							<table>
+								<thead>
+									<tr>
+										<th>Types</th>
+										<th>Valeurs</th>
+										<th>Bonus</th>
+										<th>Modificateur</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Force (FOR)</td>
+										<td><input type="number" id="force-valeur" name="force-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="force-bonus" name="force-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="force-modificateur" name="force-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Dexterité (DEX)</td>
+										<td><input type="number" id="dexterite-valeur" name="dexterite-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="dexterite-bonus" name="dexterite-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="dexterite-modificateur" name="dexterite-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Agilité (AGI)</td>
+										<td><input type="number" id="agilite-valeur" name="agilite-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="agilite-bonus" name="agilite-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="agilite-modificateur" name="agilite-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Constitution (CON)</td>
+										<td><input type="number" id="constitution-valeur" name="constitution-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="constitution-bonus" name="constitution-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="constitution-modificateur" name="constitution-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Intelligence (INT)</td>
+										<td><input type="number" id="intelligence-valeur" name="intelligence-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="intelligence-bonus" name="intelligence-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="intelligence-modificateur" name="intelligence-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Pouvoir (POU)</td>
+										<td><input type="number" id="pouvoir-valeur" name="pouvoir-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="pouvoir-bonus" name="pouvoir-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="pouvoir-modificateur" name="pouvoir-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Volonté (VOL)</td>
+										<td><input type="number" id="volonte-valeur" name="volonte-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="volonte-bonus" name="volonte-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="volonte-modificateur" name="volonte-modificateur" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Perception (PER)</td>
+										<td><input type="number" id="perception-valeur" name="perception-valeur" min="0" placeholder="0"></td>
+										<td><input type="number" id="perception-bonus" name="perception-bonus" min="0" placeholder="0"></td>
+										<td><input type="number" id="perception-modificateur" name="perception-modificateur" min="0" placeholder="0"></td>
+									</tr>                        
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Ligne pour les Flux -->
+						<div class="flux">
+							<h4 class="table-title">Flux</h4>
+							<table>
+								<thead>
+									<tr>
+										<th>Types</th>
+										<th>Base</th>
+										<th>Accumulation</th>
+										<th>Réserve</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Force</td>
+										<td><input type="number" id="flux-force-base" name="flux-force-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-force-accumulation" name="flux-force-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-force-reserve" name="flux-force-reserve" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Dexterité</td>
+										<td><input type="number" id="flux-dexterite-base" name="flux-dexterite-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-dexterite-accumulation" name="flux-dexterite-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-dexterite-reserve" name="flux-dexterite-reserve" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Agilité</td>
+										<td><input type="number" id="flux-agilite-base" name="flux-agilite-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-agilite-accumulation" name="flux-agilite-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-agilite-reserve" name="flux-agilite-reserve" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Constitution</td>
+										<td><input type="number" id="flux-constitution-base" name="flux-constitution-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-constitution-accumulation" name="flux-constitution-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-constitution-reserve" name="flux-constitution-reserve" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Pouvoir</td>
+										<td><input type="number" id="flux-pouvoir-base" name="flux-pouvoir-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-pouvoir-accumulation" name="flux-pouvoir-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-pouvoir-reserve" name="flux-pouvoir-reserve" min="0" placeholder="0"></td>
+									</tr>
+									<tr>
+										<td>Volonté</td>
+										<td><input type="number" id="flux-volonte-base" name="flux-volonte-base" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-volonte-accumulation" name="flux-volonte-accumulation" min="0" placeholder="0"></td>
+										<td><input type="number" id="flux-volonte-reserve" name="flux-volonte-reserve" min="0" placeholder="0"></td>
+									</tr>                            
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			<!-- Deuxième Ligne -->
+				<div class="block">
+					<h4 class="table-title">Points</h4>
+					<table class="points-table">
+						<thead>
+							<tr>
+								<th>Points de Vie</th>
+								<th>Points de Mana</th>
+								<th>Points de Potentiel Psychiques</th>
+								<th>Points de Maîtrise</th>
+								<th>Points d'expérience</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="number" id="pv-max" name="pv-max" min="0" placeholder="Max">
+									<input type="number" id="pv-actuel" name="pv-actuel" min="0" placeholder="Actuel">
+								</td>
+								<td>
+									<input type="number" id="mana-max" name="mana-max" min="0" placeholder="Max">
+									<input type="number" id="mana-actuel" name="mana-actuel" min="0" placeholder="Actuel">
+								</td>
+								<td>
+									<input type="number" id="potentiel-psychique-max" name="potentiel-psychique-max" min="0" placeholder="Max">
+									<input type="number" id="potentiel-psychique-actuel" name="potentiel-psychique-actuel" min="0" placeholder="Actuel">
+								</td>
+								<td>
+									<input type="number" id="maitrise-max" name="maitrise-max" min="0" placeholder="Max">
+									<input type="number" id="maitrise-actuel" name="maitrise-actuel" min="0" placeholder="Actuel">
+								</td>
+								<td>
+									<input type="number" id="experience-max" name="experience-max" min="0" placeholder="Max">
+									<input type="number" id="experience-actuel" name="experience-actuel" min="0" placeholder="Actuel">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</div>
+		
+		<!-- Deuxième Section -->
+		<div class="section-2">
+			<h3 class="section-title">Compétences Primaires</h3>
+
+			<div class="row-2">
+				<!-- Première Ligne -->
+				<div class="column">
+					<h4 class="table-title">Compétences Manaëiques</h4>
+					<table class="skills-table">
+						<thead>
+							<tr>
+								<th>Compétence</th>
+								<th>MOD</th>
+								<th>Bonus</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Mana</td>
+								<td><input type="number" id="mana-mod" name="mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="mana-bonus" name="mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="mana-total" name="mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Accumulation de mana</td>
+								<td><input type="number" id="accumulation-mana-mod" name="accumulation-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="accumulation-mana-bonus" name="accumulation-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="accumulation-mana-total" name="accumulation-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Projection Manaïque</td>
+								<td><input type="number" id="projection-mana-mod" name="projection-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="projection-mana-bonus" name="projection-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="projection-mana-total" name="projection-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Convaincre</td>
+								<td><input type="number" id="convaincre-mod" name="convaincre-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="convaincre-bonus" name="convaincre-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="convaincre-total" name="convaincre-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Dominer</td>
+								<td><input type="number" id="dominer-mod" name="dominer-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="dominer-bonus" name="dominer-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="dominer-total" name="dominer-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Lier</td>
+								<td><input type="number" id="lier-mod" name="lier-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="lier-bonus" name="lier-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="lier-total" name="lier-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Révoquer</td>
+								<td><input type="number" id="revoquer-mod" name="revoquer-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="revoquer-bonus" name="revoquer-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="revoquer-total" name="revoquer-total" min="0" placeholder="0"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="column">
+					<h4 class="table-title">Compétences Martiales</h4>
+					<table class="skills-table">
+						<thead>
+							<tr>
+								<th>Compétence</th>
+								<th>MOD</th>
+								<th>Bonus</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Attaque CàC (FOR/DEX)</td>
+								<td><input type="number" id="attaque-cac-mod" name="attaque-cac-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="attaque-cac-bonus" name="attaque-cac-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="attaque-cac-total" name="attaque-cac-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Attaque AD (DEX)</td>
+								<td><input type="number" id="attaque-ad-mod" name="attaque-ad-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="attaque-ad-bonus" name="attaque-ad-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="attaque-ad-total" name="attaque-ad-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Parade</td>
+								<td><input type="number" id="parade-mod" name="parade-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="parade-bonus" name="parade-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="parade-total" name="parade-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Esquive</td>
+								<td><input type="number" id="esquive-mod" name="esquive-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="esquive-bonus" name="esquive-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="esquive-total" name="esquive-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Flux</td>
+								<td><input type="number" id="flux-mod" name="flux-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="flux-bonus" name="flux-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="flux-total" name="flux-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Port d'armure</td>
+								<td><input type="number" id="port-armure-mod" name="port-armure-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="port-armure-bonus" name="port-armure-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="port-armure-total" name="port-armure-total" min="0" placeholder="0"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row-2">
+				<!-- Deuxième Ligne -->
+				<div class="column">
+					<h4 class="table-title">Compétences Psychiques</h4>
+					<table class="skills-table">
+						<thead>
+							<tr>
+								<th>Compétence</th>
+								<th>MOD</th>
+								<th>Bonus</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Mana</td>
+								<td><input type="number" id="psy-mana-mod" name="psy-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-mana-bonus" name="psy-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-mana-total" name="psy-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Accumulation de mana</td>
+								<td><input type="number" id="psy-accumulation-mana-mod" name="psy-accumulation-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-accumulation-mana-bonus" name="psy-accumulation-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-accumulation-mana-total" name="psy-accumulation-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Projection Manaïque</td>
+								<td><input type="number" id="psy-projection-mana-mod" name="psy-projection-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-projection-mana-bonus" name="psy-projection-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-projection-mana-total" name="psy-projection-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Convaincre</td>
+								<td><input type="number" id="psy-convaincre-mod" name="psy-convaincre-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-convaincre-bonus" name="psy-convaincre-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-convaincre-total" name="psy-convaincre-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Dominer</td>
+								<td><input type="number" id="psy-dominer-mod" name="psy-dominer-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-dominer-bonus" name="psy-dominer-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-dominer-total" name="psy-dominer-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Lier</td>
+								<td><input type="number" id="psy-lier-mod" name="psy-lier-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-lier-bonus" name="psy-lier-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-lier-total" name="psy-lier-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Révoquer</td>
+								<td><input type="number" id="psy-revoquer-mod" name="psy-revoquer-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-revoquer-bonus" name="psy-revoquer-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="psy-revoquer-total" name="psy-revoquer-total" min="0" placeholder="0"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="column">
+					<h4 class="table-title">Résistances</h4>
+					<table class="skills-table">
+						<thead>
+							<tr>
+								<th>Résistances</th>
+								<th>MOD</th>
+								<th>Bonus</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Physiques (RPhys)</td>
+								<td><input type="number" id="res-physiques-mod" name="res-physiques-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-physiques-bonus" name="res-physiques-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-physiques-total" name="res-physiques-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Maladies (RMal)</td>
+								<td><input type="number" id="res-maladies-mod" name="res-maladies-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-maladies-bonus" name="res-maladies-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-maladies-total" name="res-maladies-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Poisons (RPo)</td>
+								<td><input type="number" id="res-poisons-mod" name="res-poisons-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-poisons-bonus" name="res-poisons-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-poisons-total" name="res-poisons-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Manaïque (RMan)</td>
+								<td><input type="number" id="res-mana-mod" name="res-mana-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-mana-bonus" name="res-mana-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-mana-total" name="res-mana-total" min="0" placeholder="0"></td>
+							</tr>
+							<tr>
+								<td>Psychiques (RPsy)</td>
+								<td><input type="number" id="res-psychiques-mod" name="res-psychiques-mod" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-psychiques-bonus" name="res-psychiques-bonus" min="0" placeholder="0"></td>
+								<td><input type="number" id="res-psychiques-total" name="res-psychiques-total" min="0" placeholder="0"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+		
+<button id="downloadPDF" class="button">Enregistrer en PDF</button>
+		<button id="saveJSON" class="button">Enregistrer en JSON</button>
+		<input type="file" id="loadJSON" class="button" accept=".json" style="display: none;">
+		<label for="loadJSON" class="button" style="cursor: pointer;">Charger depuis JSON</label>
+	</div>
+	<footer class="page-footer">
+	<p>&copy; 2024 Vantairo. Tous droits réservés.</p>
+	<p>Créé par Kake</p>
+</footer>	
+</div>
+
+<script>
+	function previewImage(event) {
+		const image = document.getElementById('characterImage');
+		image.src = URL.createObjectURL(event.target.files[0]);
+		image.style.display = 'block';
+	}
+
+
+	document.getElementById('downloadPDF').addEventListener('click', () => {
+		// Cible l'intégralité de la page
+		const element = document.body;
+
+		// Configuration des options pour le fichier PDF
+		const options = {
+			margin: 0,  // Marges du document PDF
+			filename: 'Page_Complete.pdf', // Nom du fichier
+			image: { type: 'jpeg', quality: 0.98 },
+			html2canvas: { 
+				scale: 4, // Augmente l'échelle pour une meilleure qualité et pour capturer plus de contenu
+				useCORS: true,
+				scrollX: 0,
+				scrollY: 0,
+				windowWidth: document.documentElement.scrollWidth,
+				windowHeight: document.documentElement.scrollHeight
+			}, 
+			jsPDF: { unit: 'px', format: [element.offsetWidth, element.offsetHeight], orientation: 'portrait' }
+		};
+
+		// Génère et enregistre le PDF
+		html2pdf().from(element).set(options).save();
+	});
+	
+	// Fonction pour enregistrer les valeurs des inputs en JSON
+	document.getElementById('saveJSON').addEventListener('click', () => {
+		const inputs = document.querySelectorAll('input[type="number"], input[type="text"]');
+		let data = {};
+
+		// Capture les valeurs de tous les inputs et les ajoute à l'objet data
+		inputs.forEach(input => {
+			data[input.name || input.id] = input.value; // Utilise l'attribut name ou id pour identifier chaque input
+		});
+
+		// Convertit l'objet en JSON et télécharge le fichier
+		const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+		const link = document.createElement('a');
+		link.href = URL.createObjectURL(blob);
+		link.download = 'data.json';
+		link.click();
+	});
+
+	// Fonction pour charger les valeurs des inputs depuis un fichier JSON
+	document.getElementById('loadJSON').addEventListener('change', function(event) {
+		const file = event.target.files[0];
+		if (!file) return;
+
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const data = JSON.parse(e.target.result);
+			const inputs = document.querySelectorAll('input[type="number"], input[type="text"]');
+
+			// Remplit les inputs avec les valeurs chargées depuis le fichier JSON
+			inputs.forEach(input => {
+				if (data[input.name || input.id] !== undefined) {
+					input.value = data[input.name || input.id];
+				}
+			});
+		};
+
+		reader.readAsText(file);
+	});
+</script>
+
+</body>
+
+</html>
