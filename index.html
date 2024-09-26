@@ -363,13 +363,13 @@
 		
 		/* Conteneur principal qui englobe toute la page */
 		.main-container {
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh; /* Assure que le conteneur prend toute la hauteur de la page */
-			overflow-y: auto; /* Permet le défilement vertical si nécessaire */
-			background-color: #faf3e0;
-
+			border: 5px solid #7c291f; /* Crée un cadre similaire à tes autres éléments */
+			border-radius: 10px; /* Ajoute des coins arrondis pour harmoniser avec ton design */
+			padding: 20px; /* Ajoute de l'espace à l'intérieur du cadre */
+			background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement transparent */
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre subtile pour un effet de relief */
 		}
+	    
 		/* Assurer que les sections ne sont pas poussées hors de l'écran */
 		.main-container > *:not(.page-footer) {
 			flex: 1 0 auto; /* Permet aux sections de s'adapter sans pousser le haut hors de l'écran */
