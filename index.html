@@ -22,6 +22,13 @@
 				box-sizing: border-box;
 			}
 
+		@media print {
+			body {
+				width: 100vw; /* Utilise toute la largeur de la fenêtre */
+				height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+				overflow: visible; /* Assure que tout le contenu est visible */
+			}
+		}
 
 
         /* Conteneur principal de la grille */
@@ -1445,29 +1452,26 @@
 
 	// Function to download the content of the page as a PDF
 	document.getElementById('downloadPDF').addEventListener('click', () => {
-		const element = document.body;
+		const element = document.body; // Assurez-vous que l'élément capturé est bien celui désiré
 
+		// Configuration des options pour générer le PDF
 		const options = {
 			margin: 0,
 			filename: 'Page_Complete.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
 			html2canvas: {
-				scale: 1,
-				useCORS: true, // Enable CORS to avoid tainting
-				allowTaint: false, // Prevent tainting of canvas
-				scrollX: 0,
-				scrollY: 0,
-				windowWidth: document.documentElement.scrollWidth,
-				windowHeight: document.documentElement.scrollHeight
+				scale: 2, // Augmentez ou ajustez l'échelle selon les besoins
+				useCORS: true,
+				windowWidth: window.innerWidth, // Utilise la largeur complète de la fenêtre
+				windowHeight: window.innerHeight // Utilise la hauteur complète de la fenêtre
 			},
-			jsPDF: { unit: 'px', format: 'a4', orientation: 'portrait' }
+			jsPDF: { unit: 'px', format: [window.innerWidth, window.innerHeight], orientation: 'portrait' }
 		};
 
-		html2pdf().from(element).set(options).save().catch(error => {
-			console.error('Error generating PDF:', error);
-			alert('Failed to generate PDF. Ensure all images are loaded with proper CORS settings.');
-		});
+		// Génère et enregistre le PDF
+		html2pdf().from(element).set(options).save();
 	});
+
 
 
     // Fonction pour enregistrer les valeurs des inputs en JSON
