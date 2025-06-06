@@ -20,4 +20,4 @@ Pull requests are welcome. Please keep changes self‑contained and document any
 
 ## License
 
-This repository currently does not include a license file. When a `LICENSE` file is added, its terms will define how the project may be used and shared.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
