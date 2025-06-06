@@ -17,3 +17,6 @@ node_modules/
 # Temporary directories
 .tmp/
 
+# Python bytecode directories
+__pycache__/
+
