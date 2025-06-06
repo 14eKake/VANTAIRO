@@ -1,534 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANTAIRO</title>
-    <style>
-
-
-			body {
-				margin: 0;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: auto;
-				font-family: Arial, sans-serif;
-				background-color: #f8f4e3;
-				/*background-image: url('images/BACKGROUND.webp'); /* Garde ton image de fond */*/
-				background-size: cover;
-				color: #333;
-				padding: 20px; /* Ajoute de l'espace pour le cadre */
-				box-sizing: border-box;
-			}
-
-		@media print {
-			body {
-				width: 100vw; /* Utilise toute la largeur de la fenêtre */
-				height: 100vh; /* Utilise toute la hauteur de la fenêtre */
-				overflow: visible; /* Assure que tout le contenu est visible */
-			}
-		}
-		
-		#particles-js {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: -1; /* Place les particules derrière le contenu */
-			pointer-events: none; /* Empêche les particules d'interférer avec les clics */
-		}
-
-
-
-        /* Conteneur principal de la grille */
-        .grid-container {
-            display: grid;
-            grid-template-rows: 1fr 1fr; /* Deux sections de taille égale en hauteur */
-            gap: 10px;
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            /*border: 1px solid green;*/
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        /* Première section divisée en deux lignes */
-		.section-1 {
-			display: grid;
-			grid-template-rows: auto auto; /* Chaque ligne s'adapte à la taille de son contenu */
-			gap: 10px;
-			/*border: 1px solid green;*/
-			padding: 10px;
-		}
-
-		.row-1 {
-			display: grid;
-			grid-template-columns: auto auto; /* Chaque colonne s'adapte à la taille de son contenu */
-			gap: 10px;
-		}
-
-		.col-1 {
-			display: grid;
-			grid-template-rows: auto auto; /* Chaque ligne s'adapte à la taille de son contenu */
-			gap: 10px;
-		}
-
-
-        /* Deuxième colonne de la première ligne */
-		.col-2 {
-			display: grid;
-			grid-template-rows: auto auto; /* Divise la colonne en deux lignes de taille égale */
-			gap: 10px; /* Espace de 10 pixels entre les deux lignes */
-			/*background-color: #f4f4f4;*/
-			/*border: 1px solid #ccc;*/
-			padding: 10px;
-		}
-
-
-        /* Style des blocs internes */
-        .block {
-            /*border: 1px solid #ccc;*/
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            /*background-color: #f4f4f4;*/
-        }
-
-        /* Style spécifique pour la liste des informations du personnage */
-        .character-info {
-            background-color: #f8f1e4;
-            /*border: 1px solid #7c291f;*/
-            padding: 10px;
-            font-size: 14px;
-            color: #5a3e36;
-        }
-
-        .character-info h4 {
-            margin: 0 0 5px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #7c291f;
-            border-bottom: 1px solid #7c291f;
-            padding-bottom: 5px;
-        }
-
-        .character-info ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .character-info li {
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .character-info label {
-            width: 60px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .character-info input {
-            flex: 1;
-            padding: 5px;
-            /*border: 1px solid #ccc;*/
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        /* Deuxième section simple */
-		.section-2 {
-			display: grid;
-			grid-template-rows: 1fr 1fr; /* Deux lignes de taille égale */
-			gap: 20px;
-		}
-
-        /* Style pour les titres */
-        .title {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0;
-            color: #333;
-        }
-
-        /* Style pour les paragraphes */
-        .content {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #555;
-        }
-
-		/* Style pour centrer le label du bouton "Charger depuis JSON" */
-		.button-container {
-			display: flex;
-			justify-content: center;
-			gap: 10px; /* Espace entre les boutons */
-		}
-
-		.button {
-			padding: 10px 15px;
-			border: none;
-			background-color: #4CAF50;
-			color: white;
-			font-size: 14px;
-			cursor: pointer;
-			border-radius: 5px;
-			transition: background-color 0.3s;
-		}
-
-        .button:hover {
-            background-color: #45a049;
-        }
-		
-		label[for="loadJSON"] {
-			display: inline-block;
-			padding: 10px 15px;
-			background-color: #4CAF50;
-			color: white;
-			font-size: 14px;
-			cursor: pointer;
-			border-radius: 5px;
-			transition: background-color 0.3s;
-		}
-
-		label[for="loadJSON"]:hover {
-			background-color: #45a049;
-		}
-		
-		.image-frame {
-			display: inline-block; /* Le cadre s'adapte à la taille de l'image */
-			padding: 5px;
-			border: 2px solid #7c291f; /* Couleur et épaisseur du cadre */
-			border-radius: 8px; /* Coins arrondis */
-			background-color: #fff; /* Fond blanc pour contraster */
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de relief */
-		}
-
-		#characterImage {
-			display: block;
-			max-width: 100%; /* L'image s'ajuste à l'espace disponible */
-			border-radius: 4px; /* Coins arrondis de l'image pour s'harmoniser avec le cadre */
-		}
-
-		/* Style des titres des tableaux */
-		.table-title {
-			margin: 0 0 5px;
-			font-size: 16px;
-			font-weight: bold;
-			color: #7c291f;
-			border-bottom: 1px solid #7c291f;
-			padding-bottom: 5px;
-		}
-
-		/* Style des tableaux */
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-bottom: 10px;
-			background-color: #f8f1e4;
-		}
-
-		th, td {
-			border: 1px solid #7c291f;
-			padding: 5px;
-			text-align: left;
-			font-size: 14px;
-		}
-
-		th {
-			background-color: #e5d1ba;
-			color: #7c291f;
-			font-weight: bold;
-		}
-
-		td input {
-			width: 100%;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			padding: 3px;
-			font-size: 14px;
-			box-sizing: border-box;
-		}
-		
-		/* Style des titres des tableaux */
-		.table-title {
-			margin: 0 0 5px;
-			font-size: 16px;
-			font-weight: bold;
-			color: #7c291f;
-			border-bottom: 1px solid #7c291f;
-			padding-bottom: 5px;
-		}
-
-		/* Style du tableau des points */
-		.points-table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-top: 10px;
-			background-color: #f8f1e4;
-		}
-
-		.points-table th, .points-table td {
-			border: 1px solid #7c291f;
-			padding: 5px;
-			text-align: center;
-			font-size: 14px;
-		}
-
-		.points-table th {
-			background-color: #e5d1ba;
-			color: #7c291f;
-			font-weight: bold;
-		}
-
-		.points-table td input {
-			width: 80%;
-			border: 1px solid #b89d76;
-			border-radius: 4px;
-			padding: 5px;
-			font-size: 14px;
-			box-sizing: border-box;
-			background-color: #faf3e0; /* Couleur douce pour le fond */
-			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre intérieure subtile */
-			transition: background-color 0.3s, border-color 0.3s;
-		}
-
-		.points-table td input:focus {
-			background-color: #fff8e7; /* Fond légèrement plus clair au focus */
-			border-color: #7c291f; /* Couleur de la bordure au focus */
-			outline: none; /* Retire la bordure bleue par défaut */
-		}
-		
-		/* Style global pour tous les inputs de la page */
-		input[type="number"], input[type="text"], input[type="file"] {
-			width: 80%;
-			border: 1px solid #b89d76;
-			border-radius: 4px;
-			padding: 5px;
-			font-size: 14px;
-			box-sizing: border-box;
-			background-color: #faf3e0; /* Couleur douce pour le fond */
-			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre intérieure subtile */
-			transition: background-color 0.3s, border-color 0.3s;
-		}
-
-		/* Style pour le focus des inputs */
-		input[type="number"]:focus, input[type="text"]:focus, input[type="file"]:focus {
-			background-color: #fff8e7; /* Fond légèrement plus clair au focus */
-			border-color: #7c291f; /* Couleur de la bordure au focus */
-			outline: none; /* Retire la bordure bleue par défaut */
-		}
-
-		.section-2 {
-			display: grid;
-			grid-template-rows: auto auto; /* Deux lignes de taille égale */
-			gap: 20px;
-		}
-
-		.row-2 {
-			display: grid;
-			grid-template-columns: 1fr 1fr; /* Deux colonnes de taille égale */
-			gap: 20px;
-		}
-
-		.column {
-			background-color: #f8f1e4;
-			padding: 10px;
-			border: 1px solid #7c291f;
-			border-radius: 5px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		}
-
-		.section-title {
-			grid-column: 1 / -1;
-			font-size: 20px;
-			color: #7c291f;
-			margin-bottom: 10px;
-			text-align: center;
-		}
-
-		/* Table styles */
-		.skills-table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		.skills-table th, .skills-table td {
-			border: 1px solid #7c291f;
-			padding: 5px;
-			text-align: left;
-			font-size: 14px;
-		}
-
-		.skills-table th {
-			background-color: #e5d1ba;
-			color: #7c291f;
-			font-weight: bold;
-		}
-
-		.skills-table td input {
-			width: 80%;
-			padding: 4px;
-			border: 1px solid #b89d76;
-			border-radius: 4px;
-			background-color: #faf3e0;
-		}
-		
-		.main-container {
-			border: 5px solid #7c291f; /* Crée un cadre similaire à tes autres éléments */
-			border-radius: 10px; /* Ajoute des coins arrondis pour harmoniser avec ton design */
-			padding: 20px; /* Ajoute de l'espace à l'intérieur du cadre */
-			background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement transparent */
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre subtile pour un effet de relief */
-		}
-		
-		/* Assurer que les sections ne sont pas poussées hors de l'écran */
-		.main-container > *:not(.page-footer) {
-			flex: 1 0 auto; /* Permet aux sections de s'adapter sans pousser le haut hors de l'écran */
-		}
-		
-		
-		/* Désactive les hauteurs excessives */
-		section, header, footer {
-			max-height: none; /* Empêche des hauteurs trop restrictives */
-		}
-		
-		.page-footer {
-			width: 100%; /* Le footer prend toute la largeur */
-			padding: 20px;
-			background-color: #7c291f; /* Couleur adaptée à votre design */
-			color: #fff;
-			text-align: center;
-			box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-			font-size: 14px;
-			border-radius: 5px;
-			margin-top: auto;
-			position: relative; /* Assure qu'il suit le flux du document */
-		}
-
-		footer, .grid-container {
-			width: 100%; /* Assure que tous les éléments prennent toute la largeur disponible */
-			box-sizing: border-box;
-		}
-		.page-footer p {
-			margin: 5px 0;
-		}
-
-		.footer-links a {
-			color: #f8f1e4;
-			text-decoration: none;
-			margin: 0 5px;
-			transition: color 0.3s;
-		}
-
-		.footer-links a:hover {
-			color: #ddd; /* Change la couleur au survol */
-		}
-		
-		/* Style pour la troisième section */
-		.section-3 {
-			display: grid;
-			grid-template-rows: auto; /* La section s'adapte à la taille de son contenu */
-			gap: 20px;
-			padding: 10px;
-		}
-
-		/* Style pour la rangée avec deux colonnes */
-		.row-3 {
-			display: grid;
-			grid-template-columns: 1fr 1fr; /* Deux colonnes de taille égale */
-			gap: 20px;
-		}
-
-		/* Style pour chaque colonne */
-		.column {
-			background-color: #f8f1e4;
-			padding: 10px;
-			border: 1px solid #7c291f;
-			border-radius: 5px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-		}
-
-		.table-title {
-			margin: 0 0 5px;
-			font-size: 16px;
-			font-weight: bold;
-			color: #fff; /* Change la couleur du texte en blanc */
-			background-color: rgba(0, 0, 0, 0.6); /* Ajoute un fond noir transparent */
-			padding: 5px;
-			border-bottom: 1px solid #7c291f;
-			border-radius: 5px; /* Ajoute un effet arrondi aux coins */
-		}
-
-		.help-button {
-			background-color: #007BFF; /* Couleur de fond bleu */
-			border: none;
-			font-size: 16px;
-			cursor: pointer;
-			color: #fff;
-			border-radius: 50%; /* Rond */
-			width: 30px;
-			height: 30px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			position: relative;
-			top: 10px;
-			right: 10px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Légère ombre */
-		}
-
-		.help-popup {
-			display: none; /* Caché par défaut */
-			position: fixed;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			z-index: 1000;
-			background-color: #fff;
-			border: 2px solid #7c291f;
-			border-radius: 8px;
-			padding: 20px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-			max-width: 400px;
-		}
-
-		.help-content {
-			position: relative;
-		}
-
-		.close-popup {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			font-size: 20px;
-			cursor: pointer;
-			color: #7c291f;
-		}
-
-
-
-    </style>
-
+    <link rel="stylesheet" href="style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 </head>
 <body>
-
 <div class="main-container">
 	<div class="grid-container">
 	<div id="particles-js"></div>
-
 		<!-- Première Section avec deux lignes -->
 		<div class="section-1">
 			<!-- Première Ligne avec deux colonnes -->
@@ -639,7 +122,6 @@
 								</tbody>
 							</table>
 						</div>
-
 						<!-- Ligne pour les Flux -->
 						<div class="flux">
 							<h4 class="table-title">Flux</h4>
@@ -776,7 +258,6 @@
 		<!-- Deuxième Section -->
 		<div class="section-2">
 			<h3 class="section-title">Compétences Primaires</h3>
-
 			<div class="row-2">
 				<!-- Première Ligne -->
 				<div class="column">
@@ -888,7 +369,6 @@
 					</table>
 				</div>
 			</div>
-
 			<div class="row-2">
 				<!-- Deuxième Ligne -->
 				<div class="column">
@@ -958,7 +438,6 @@
 					</table>
 				</div>
 			</div>
-
 		</div>
 	
 		<!-- Troisième Section -->
@@ -1019,7 +498,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Tableau Vitales -->
 					<div class="line">
 						<h4 class="table-title">Vitales</h4>
@@ -1054,7 +532,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Tableau Sensorielles -->
 					<div class="line">
 						<h4 class="table-title">Sensorielles</h4>
@@ -1089,7 +566,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Tableau Clandestines -->
 					<div class="line">
 						<h4 class="table-title">Clandestines</h4>
@@ -1148,7 +624,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Tableau Sociales -->
 					<div class="line">
 						<h4 class="table-title">Sociales</h4>
@@ -1190,7 +665,6 @@
 						</table>
 					</div>
 				</div>
-
 				<!-- Deuxième Colonne avec 3 lignes -->
 				<div class="column">
 					<!-- Première Ligne - Tableau Créatives -->
@@ -1239,7 +713,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Deuxième Ligne - Tableau Intellectuelles -->
 					<div class="line">
 						<h4 class="table-title">Intellectuelles</h4>
@@ -1316,7 +789,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- Troisième Ligne - Tableau Inventaire -->
 					<div class="line">
 						<h4 class="table-title">Inventaire</h4>
@@ -1352,11 +824,9 @@
 						</table>
 						<button class="button" id="addRowBtn">Ajouter une ligne</button>
 					</div>
-
 				</div>
 		</div>
 		</div>
-
 		<!-- Quatrième Section - Techniques Martiales -->
 		<div class="section-4">
 			<h4 class="table-title">Techniques Martiales</h4>
@@ -1392,7 +862,6 @@
 			</table>
 			<button class="button" id="addMartialRowBtn">Ajouter une ligne</button>
 		</div>
-
 		<!-- Cinquième Section - Sorts Manaëiques -->
 		<div class="section-5">
 			<h4 class="table-title">Sorts Manaëiques</h4>
@@ -1428,7 +897,6 @@
 			</table>
 			<button class="button" id="addSpellRowBtn">Ajouter une ligne</button>
 		</div>
-
 		<!-- Sixième Section - Talent Générique -->
 		<div class="section-6">
 			<h4 class="table-title">Talents Générique</h4>
@@ -1464,7 +932,6 @@
 				</table>
 			<button class="button" id="addTalentRowBtn">Ajouter une ligne</button>
 		</div>
-
 	<div class="button-container">
 		<button id="downloadPDF" class="button">Enregistrer en PDF</button>
 		<button id="saveJSON" class="button">Enregistrer en JSON</button>
@@ -1473,8 +940,6 @@
 			<button id="helpButton" class="help-button">?</button>
 	</div>
 	
-
-
 	<!-- Pop-up explicatif -->
 	<div id="helpPopup" class="help-popup">
 		<div class="help-content">
@@ -1484,280 +949,12 @@
 			<p>Pour charger des données depuis un fichier JSON, cliquez sur le bouton "Charger depuis JSON" et sélectionnez votre fichier. Les champs du formulaire seront remplis automatiquement avec les données du fichier.</p>
 		</div>
 	</div>
-
-
 	<footer class="page-footer">
 		<p>&copy; 2024 Vantairo. Tous droits réservés.</p>
 		<p>Créé par Kake</p>
 	</footer>	
 	</div>
 </div>
-
-<script>
-    // Fonction pour prévisualiser l'image sélectionnée
-	function previewImage(event) {
-		const image = document.getElementById('characterImage');
-		const file = event.target.files[0];
-		
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = function (e) {
-				image.src = e.target.result;
-				image.crossOrigin = "anonymous"; // Ensures CORS is set when loading
-				image.style.display = 'block';
-			};
-			reader.readAsDataURL(file);
-		}
-	}
-
-
-	// Function to download the content of the page as a PDF
-	document.getElementById('downloadPDF').addEventListener('click', () => {
-		const element = document.body; // Assurez-vous que l'élément capturé est bien celui désiré
-
-		// Configuration des options pour générer le PDF
-		const options = {
-			margin: 0,
-			filename: 'Page_Complete.pdf',
-			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: {
-				scale: 2, // Augmentez ou ajustez l'échelle selon les besoins
-				useCORS: true,
-				windowWidth: window.innerWidth, // Utilise la largeur complète de la fenêtre
-				windowHeight: window.innerHeight // Utilise la hauteur complète de la fenêtre
-			},
-			jsPDF: { unit: 'px', format: [window.innerWidth, window.innerHeight], orientation: 'portrait' }
-		};
-
-		// Génère et enregistre le PDF
-		html2pdf().from(element).set(options).save();
-	});
-
-
-
-    // Fonction pour enregistrer les valeurs des inputs en JSON
-    document.getElementById('saveJSON').addEventListener('click', () => {
-        const inputs = document.querySelectorAll('input[type="number"], input[type="text"]');
-        let data = {};
-
-        // Capture les valeurs de tous les inputs et les ajoute à l'objet data
-        inputs.forEach(input => {
-            if (input.name || input.id) {  // Vérifie que l'input a un name ou un id
-                data[input.name || input.id] = input.value; // Utilise l'attribut name ou id pour identifier chaque input
-            }
-        });
-
-        // Convertit l'objet en JSON et télécharge le fichier
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'data.json';
-        link.click();
-    });
-
-    // Fonction pour charger les valeurs des inputs depuis un fichier JSON
-    document.getElementById('loadJSON').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            try {
-                const data = JSON.parse(e.target.result);
-                const inputs = document.querySelectorAll('input[type="number"], input[type="text"]');
-
-                // Remplit les inputs avec les valeurs chargées depuis le fichier JSON
-                inputs.forEach(input => {
-                    if (input.name || input.id) {  // Vérifie que l'input a un name ou un id
-                        if (data[input.name || input.id] !== undefined) {
-                            input.value = data[input.name || input.id];
-                        }
-                    }
-                });
-            } catch (error) {
-                console.error('Erreur lors de la lecture du fichier JSON :', error);
-                alert('Le fichier JSON est invalide ou corrompu.');
-            }
-        };
-
-        reader.readAsText(file);
-    });
-
-    // Fonction pour ajouter une ligne dans le tableau de l'inventaire
-    document.getElementById('addRowBtn').addEventListener('click', function () {
-        const table = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
-        const rowCount = table.rows.length + 1;
-
-        const row = table.insertRow();
-        row.innerHTML = `
-            <td><input type="text" id="inv-item-${rowCount}-name" name="inv-item-${rowCount}-name" placeholder="-"></td>
-            <td><input type="number" id="inv-item-${rowCount}-weight" name="inv-item-${rowCount}-weight" min="0" placeholder="0"></td>
-            <td><input type="number" id="inv-item-${rowCount}-price" name="inv-item-${rowCount}-price" min="0" placeholder="0"></td>
-            <td><input type="text" id="inv-item-${rowCount}-desc" name="inv-item-${rowCount}-desc" placeholder="-"></td>
-        `;
-    });
-	
-	// Fonction pour ajouter une ligne dans le tableau des Techniques Martiales
-	document.getElementById('addMartialRowBtn').addEventListener('click', function () {
-				const table = document.getElementById('martialTechniquesTable').getElementsByTagName('tbody')[0];
-				const rowCount = table.rows.length + 1;
-
-				const row = table.insertRow();
-				row.innerHTML = `
-					<td><input type="text" id="martial-tech-${rowCount}-name" name="martial-tech-${rowCount}-name" placeholder="-"></td>
-					<td><input type="text" id="martial-tech-${rowCount}-level" name="martial-tech-${rowCount}-level" placeholder="-"></td>
-					<td><input type="text" id="martial-tech-${rowCount}-cost" name="martial-tech-${rowCount}-cost" placeholder="-"></td>
-					<td><input type="text" id="martial-tech-${rowCount}-desc" name="martial-tech-${rowCount}-desc" placeholder="-"></td>
-				`;
-			});	
-
-	// Fonction pour ajouter une ligne dans le tableau des Sorts Manaëiques
-	document.getElementById('addSpellRowBtn').addEventListener('click', function () {
-		const table = document.getElementById('manaSpellsTable').getElementsByTagName('tbody')[0];
-		const rowCount = table.rows.length + 1;
-
-		const row = table.insertRow();
-		row.innerHTML = `
-			<td><input type="text" id="spell-${rowCount}-name" name="spell-${rowCount}-name" placeholder="-"></td>
-			<td><input type="text" id="spell-${rowCount}-level" name="spell-${rowCount}-level" placeholder="-"></td>
-			<td><input type="text" id="spell-${rowCount}-cost" name="spell-${rowCount}-cost" placeholder="-"></td>
-			<td><input type="text" id="spell-${rowCount}-desc" name="spell-${rowCount}-desc" placeholder="-"></td>
-		`;
-	});
-	
-	// Fonction pour ajouter une ligne dans le tableau des Talent générique
-	document.getElementById('addTalentRowBtn').addEventListener('click', function () {
-		const table = document.getElementById('talentgenerique').getElementsByTagName('tbody')[0];
-		const rowCount = table.rows.length + 1;
-
-		const row = table.insertRow();
-		row.innerHTML = `
-			<td><input type="text" id="talent-${rowCount}-name" name="talent-${rowCount}-name" placeholder="-"></td>
-			<td><input type="text" id="talent-${rowCount}-level" name="talent-${rowCount}-level" placeholder="-"></td>
-			<td><input type="text" id="talent-${rowCount}-cost" name="talent-${rowCount}-cost" placeholder="-"></td>
-			<td><input type="text" id="talent-${rowCount}-desc" name="talent-${rowCount}-desc" placeholder="-"></td>
-		`;
-	});			
-	
-	// Script pour afficher le pop-up d'aide
-	document.getElementById('helpButton').addEventListener('click', () => {
-		document.getElementById('helpPopup').style.display = 'block';
-	});
-
-	// Script pour fermer le pop-up
-	document.getElementById('closePopup').addEventListener('click', () => {
-		document.getElementById('helpPopup').style.display = 'none';
-	});
-
-	// Fermer le pop-up quand on clique à l'extérieur
-	window.addEventListener('click', (event) => {
-		const popup = document.getElementById('helpPopup');
-		if (event.target === popup) {
-			popup.style.display = 'none';
-		}
-	});
-
-
-</script>
-
-<script>
-	// Crée une nouvelle image pour le background
-	const img = new Image();
-	img.src = 'images/BACKGROUND.webp';
-	img.crossOrigin = 'anonymous'; // Assure la conformité CORS
-	img.onload = function() {
-		// Applique l'image de fond et les styles nécessaires
-		document.body.style.backgroundImage = `url(${img.src})`;
-		document.body.style.backgroundSize = 'contain'; // Définit l'image de fond à couvrir toute la page
-		document.body.style.margin = '0';
-		document.body.style.display = 'flex';
-		document.body.style.justifyContent = 'center';
-		document.body.style.alignItems = 'center';
-		document.body.style.height = 'auto';
-		document.body.style.fontFamily = 'Arial, sans-serif';
-		document.body.style.backgroundColor = '#f8f4e3'; // Couleur de fond au cas où l'image ne charge pas
-		document.body.style.color = '#333';
-		document.body.style.padding = '20px'; // Ajoute de l'espace pour le cadre
-		document.body.style.boxSizing = 'border-box';
-    		document.body.style.backgroundAttachment = 'fixed'; // Fixe l'image en arrière-plan
-
-
-	};
-	
-	particlesJS('particles-js', {
-    "particles": {
-        "number": {
-            "value": 80, // Ajuste le nombre de particules
-            "density": {
-                "enable": true,
-                "value_area": 800
-            }
-        },
-        "color": {
-            "value": ["#ff4500", "#ff8c00", "#ffd700"] // Couleurs pour simuler des flammes
-        },
-        "shape": {
-            "type": "circle",
-            "stroke": {
-                "width": 0,
-                "color": "#000000"
-            },
-        },
-        "opacity": {
-            "value": 0.7,
-            "random": true,
-            "anim": {
-                "enable": true,
-                "speed": 1,
-                "opacity_min": 0.3,
-                "sync": false
-            }
-        },
-        "size": {
-            "value": 5,
-            "random": true,
-            "anim": {
-                "enable": true,
-                "speed": 5,
-                "size_min": 1,
-                "sync": false
-            }
-        },
-        "line_linked": {
-            "enable": false
-        },
-        "move": {
-            "enable": true,
-            "speed": 6,
-            "direction": "top",
-            "random": false,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false,
-            "attract": {
-                "enable": false,
-                "rotateX": 600,
-                "rotateY": 1200
-            }
-        }
-    },
-    "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-            "onhover": {
-                "enable": false
-            },
-            "onclick": {
-                "enable": false
-            },
-            "resize": true
-        }
-    },
-    "retina_detect": true
-});
-
-
-</script>
+    <script src="script.js"></script>
 </body>
-
 </html>
