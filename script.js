@@ -162,28 +162,15 @@
 	});
 
 
-	// Crée une nouvelle image pour le background
-	const img = new Image();
-	img.src = 'images/BACKGROUND.webp';
-	img.crossOrigin = 'anonymous'; // Assure la conformité CORS
-	img.onload = function() {
-		// Applique l'image de fond et les styles nécessaires
-		document.body.style.backgroundImage = `url(${img.src})`;
-                document.body.style.backgroundSize = 'cover'; // Définit l'image de fond à couvrir toute la page
-		document.body.style.margin = '0';
-		document.body.style.display = 'flex';
-		document.body.style.justifyContent = 'center';
-		document.body.style.alignItems = 'center';
-		document.body.style.height = 'auto';
-		document.body.style.fontFamily = 'Arial, sans-serif';
-		document.body.style.backgroundColor = '#f8f4e3'; // Couleur de fond au cas où l'image ne charge pas
-		document.body.style.color = '#333';
-		document.body.style.padding = '20px'; // Ajoute de l'espace pour le cadre
-		document.body.style.boxSizing = 'border-box';
-    		document.body.style.backgroundAttachment = 'fixed'; // Fixe l'image en arrière-plan
+        // Crée une nouvelle image pour le background
+        const img = new Image();
+        img.src = 'images/BACKGROUND.webp';
+        img.crossOrigin = 'anonymous'; // Assure la conformité CORS
+        img.onload = function() {
+                // Ajoute une classe une fois l'image chargée pour appliquer le style du fond
+                document.body.classList.add('background-loaded');
 
-
-	};
+        };
 	
 	particlesJS('particles-js', {
     "particles": {
