@@ -1,0 +1,19 @@
+# Ignore log files
+*.log
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Node modules
+node_modules/
+
+# Temporary directories
+.tmp/
+
