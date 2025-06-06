@@ -18,6 +18,15 @@ No additional server setup is required; everything works offline once the file i
 
 Pull requests are welcome. Please keep changes self‑contained and document any new features. You can also open issues to discuss ideas or report problems.
 
+## Running Tests
+
+Install the Python dependencies listed in `requirements.txt` and then run `pytest`:
+
+```bash
+pip install -r requirements.txt
+pytest
+```
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
